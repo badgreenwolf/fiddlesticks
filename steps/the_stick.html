@@ -1,0 +1,99 @@
+<h1 style="background-color: #2b2b2b; color: #a9b7c6; font-family: 'Source Code Pro'; font-size: 10.5pt;">Introduction to the stick</h1>
+<p>The stick is either an operation , a value of something, or a small numerical constant. Its 2 bytes long. Sticks are always in arrays of up to 16 long, and they point to one another. </p>
+<p>&nbsp;</p>
+<p>The stick</p>
+<table border="1">
+    <tbody>
+    <tr>
+        <td><strong>Part</strong></td>
+        <td><strong>Size</strong></td>
+        <td><strong>Notes</strong></td>
+    </tr>
+    <tr>
+        <td>GRAB</td>
+        <td>4 bits</td>
+        <td>the index of what this stick grabs on to, set to 0 for not grabbing anything</td>
+    </tr>
+    <tr>
+        <td>Flags</td>
+        <td>4 bits</td>
+        <td>
+            <p>bits 1 and 0 tell the type of stick, 0 = NOP which means no stick here,1 is a value, 2 is an operation,3 is a constant</p>
+            <p>bits 2 and 3 are currently undefined, but should be set to zero for right now</p>
+        </td>
+    </tr>
+    <tr>
+        <td>TypeUnion</td>
+        <td>1 byte</td>
+        <td>
+            <p>if flags say OP this is an unsigned byte, which is the opcode of the operation. There can be up to 256 different operations</p>
+            <p>if flags say Constant, then this is a signed byte</p>
+            <p>if flags says Value then unsigned byte of the offset of the data in entire array</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Stick Array Header (4 bytes)</p>
+<p>&nbsp;</p>
+<table border="1">
+    <tbody>
+    <tr>
+        <td>size total array</td>
+        <td>1 byte</td>
+        <td>from 8 bytes 164 bytes</td>
+    </tr>
+    <tr>
+        <td>number of sticks</td>
+        <td>4 bits</td>
+        <td>from 1 to 16 sticks, 0 sticks arrays are not made</td>
+    </tr>
+    <tr>
+        <td>size of data </td>
+        <td>4 bits</td>
+        <td>size is from 1 to 8</td>
+    </tr>
+    <tr>
+        <td>number of data</td>
+        <td>5 bits</td>
+        <td>from 0 to 16</td>
+    </tr>
+    <tr>
+        <td>type of data</td>
+        <td>3 bits</td>
+        <td>integer, floating</td>
+    </tr>
+    <tr>
+        <td>flags</td>
+        <td>8 bits</td>
+        <td>currently unused</td>
+    </tr>
+    </tbody>
+</table>
+<p>&nbsp;</p>
+<p>Stick Array is organized like below, and can be from 8 bytes to 164 bytes</p>
+<p>&nbsp;</p>
+<table border="1">
+    <tbody>
+    <tr>
+        <td>Header</td>
+        <td>4 bytes</td>
+        <td>see header above</td>
+    </tr>
+    <tr>
+        <td>Sticks</td>
+        <td>2 to 32 bytes</td>
+        <td>see sticks above</td>
+    </tr>
+    <tr>
+        <td>Values</td>
+        <td>0 to 128 bytes</td>
+        <td>all of the same size and type as defined in the header</td>
+    </tr>
+    </tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
